@@ -29,11 +29,11 @@ def reproject_landsat_image(landsat_image_path, output_path):
                 
 def compute_class_weights(dataset):
     road_pixels = 0
-    total_pixels = 0
+    non_road_pixels = 0
     for i in range(len(dataset)):
         label_mask = dataset[i][1]
-        if torch.is_tensor(label_mask):
-            label_mask = label_mask.numpy()
-        road_pixels += np.count_nonzero(label_mask)
-        total_pixels += label_mask.size
-    return torch.tensor([total_pixels / road_pixels - 1])
+        road_pixels += torch.sum(label_mask == 1)
+        non_road_pixels += torch.sum(label_mask == 0)
+    return torch.tensor([non_road_pixels/road_pixels])
+
+    

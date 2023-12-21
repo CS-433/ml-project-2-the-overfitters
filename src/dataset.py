@@ -23,7 +23,6 @@ class SatelliteRoadDataset(Dataset):
         self.buffer_size = buffer_size
 
         # Calculate the number of patches (all bands have the same dimensions)
-        # All the patches should be completely contained in the satellite image
         with rasterio.open(self.images_paths[0]) as src:
             self.img_width, self.img_height = src.width, src.height
             self.src_transform = src.transform
