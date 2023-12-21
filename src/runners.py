@@ -26,7 +26,7 @@ def train(dataloader, model, loss_fn, optimizer, device, epoch, writer):
     avg_f1 = total_f1 / len(dataloader)
     writer.add_scalar("Loss/train", avg_loss, epoch)
     writer.add_scalar("F1/train", avg_f1, epoch)
-    return avg_loss, avg_f1, pred_bin, y_true
+    return avg_loss, avg_f1
 
 # Validation
 @torch.no_grad()
